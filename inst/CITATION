@@ -1,0 +1,25 @@
+bibentry(
+    bibtype = "Article",
+    title   = "*** ANOVA-Like Differential Gene Expression Analysis of Single-Organism and Meta-RNA-Seq",
+    author  = as.person("Fernandes, AD and Macklaim, JM and Linn, TG and Reid, G and Gloor, GB"),
+    journal = "*** PLoS ONE, 2013, volume 8, issue 7, e67019",
+    isbn    = "*** 3-900051-07-0",
+    year    = "2013",
+    url     = "*** http://dx.doi.org/10.1371%2/journal.pone.0067019"
+)
+bibentry(
+    bibtype = "Article",
+    title   = "*** Unifying the analysis of high-throughput sequencing datasets: characterizing RNA-seq, 16S rRNA gene sequencing and selective growth experiments by compositional data analysis",
+    author  = as.person("Fernandes, A. D. and Reid, J. and Macklaim, J. M. and McMurrough, T.A and Edgell, D.R. and Gloor, G. B."),
+    journal = "*** Microbiome, 2014, volume 2, 15 ",
+    year    = "2014",
+    url     = "*** http://doi:10.1186/2049-2618-2-15"
+)
+bibentry(
+    bibtype = "Article",
+    title   = "*** Displaying Variation in Large Datasets: a Visual Summary of Effect Sizes",
+    author  = as.person("Gregory B. Gloor and Jean M. Macklaim and Andrew D. Fernandes"),
+    journal = "*** Journal of Computational and Graphical Statistics, ",
+    year    = "2016",
+    url     = "*** http://dx.doi.org/10.1080/10618600.2015.1131161"
+)
