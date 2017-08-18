@@ -176,7 +176,7 @@ if (verbose == TRUE) print("dirichlet samples complete")
     }
 if (verbose == TRUE) print("clr transformation complete")
 
-if ( denom == "house" ) denom = feature.subset[[1]]
+if ( denom == "lvha" ) denom = feature.subset[[1]]
 
 
     return(new("aldex.clr",reads=reads,mc.samples=mc.samples,conds=conds,denom=denom,verbose=verbose,useMC=useMC,analysisData=l2p))

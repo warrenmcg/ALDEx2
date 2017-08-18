@@ -24,7 +24,7 @@
 # i.e.
 # conds <- c(rep("A", 10), rep("B", 10))
 #
-# The 'input' input can be "zero", "iqlr", "all", "house", "" or numeric for advanced
+# The 'input' input can be "zero", "iqlr", "all", "lvha", "" or numeric for advanced
 # users.
 #
 # 'input' defaults to "all" if either no parameters or incorrect parameters
@@ -48,7 +48,7 @@ aldex.set.mode <- function(reads, conds, denom="all")
         } else if (denom == "all" | denom == "") {
             print("computing center with all features")
             features <- all.features(reads,conds)
-        } else if (denom == "house" ) {
+        } else if (denom == "lvha" ) {
             print("computing center with housekeeping features")
             features <- house.features(reads,conds)
         } else {
@@ -136,14 +136,14 @@ house.features <- function(reads, conds)
 	  < quantile(unlist(reads.var))[2])
 
 	# find the most relative abundant
-	# top quartile
-	reads.abund <- apply(reads.clr[these.rows,],
-	  2, sum)
-	abund.set <- which(reads.abund >
-	  quantile(reads.abund)[4])
+	# top quartile in each sample
+	quantile.sample <- apply(reads.clr, 1, quantile)
+
+	abund.set <- apply(reads.clr, 2, function(x)
+      sum(x > quantile.sample[4,]) == length(quantile.sample[4,]))
 
 	invariant.set.list[[i]] <-
-	  intersect(var.set, abund.set)
+	  intersect(var.set, which(abund.set == TRUE))
   }
 
   # get the intersect of all conditions
@@ -156,6 +156,7 @@ house.features <- function(reads, conds)
     {
         neg.indicies[[i]] <- invariant.set
     }
+  if(!length(neg.indicies[[1]])) stop("No features are low variance and high relative abundance")
   return(neg.indicies)
 }
 
