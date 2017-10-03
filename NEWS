@@ -1,3 +1,10 @@
+CHANGES IN VERSION 1.9.4
+
+NE FEATURES (GBG)
+
+    o added ability to auto-choose low variance high relative abundance features as
+    the basis
+
 CHANGES IN VERSION 1.8.1
 -------------------------
 
