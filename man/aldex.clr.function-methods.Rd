@@ -46,7 +46,8 @@
           possible to supply a vector of row indices to use as the denominator.
           Here, the experimentalist is determining a-priori which rows are thought
           to be invariant. In the case of RNA-seq, this could include ribosomal
-          protein genes and and other house-keeping genes.
+          protein genes and and other house-keeping genes. The row indices should
+          correspond to the features in the input reads.
       }
      \item{verbose}{
         Print diagnostic information while running. Useful only for debugging

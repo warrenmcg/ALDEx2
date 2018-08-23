@@ -56,7 +56,16 @@ if (summarizedExperiment) {
 
     # remove any row in which the sum of the row is 0
     z <- as.numeric(apply(reads, 1, sum))
-    reads <- as.data.frame( reads[(which(z > minsum)),]  )
+    num_zero <- sum(z <= minsum)
+    if ( num_zero > 0 & !is.character(denom) ) {
+      old_denoms <- rownames(reads)[denom]
+      reads <- as.data.frame( reads[(which(z > minsum)), ]  )
+      denom <- which(rownames(reads) %in% old_denoms)
+      warning("some rows with sums equal to zero were removed, but custom features were provided.\n",
+              "The custom feature indices were adjusted to account for this.\n",
+              "This was to prevent the wrong features from being used downstream.\n",
+              "Please check to make sure the right features are being used.")
+    }
 
     if (verbose) print("removed rows with sums equal to zero")
 
