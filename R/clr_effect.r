@@ -163,7 +163,13 @@ if (verbose == TRUE) print("between group difference calculated")
 if (verbose == TRUE) print("group summaries calculated")
 
     effect  <- t(rowMedians(l2d$effect))
-    overlap <- apply( l2d$effect, 1, function(row) { min( aitchison.mean( c( sum( row < 0 ) , sum( row > 0 ) ) + 0.5 ) ) } )
+    change_df <- data.frame(down = rowSums(l2d$effect < 0), up = rowSums(l2d$effect > 0))
+    # if ALR is used with a single feature or mALR is used with features that have identical counts,
+    # their effects will be NA and will cause aitchison mean to break
+    # setting their effects to 0 will result in overlap statistic of 0.5, which is the expected value
+    # for denominator features
+    change_df[is.na(change_df)] <- 0
+    overlap <- apply( change_df, 1, function(row) { min( aitchison.mean( c( row[1], row[2] ) + 0.5 ) ) } )
 if (verbose == TRUE) print("effect size calculated")
 
 # make and fill in the data table
