@@ -29,6 +29,7 @@ Imports:
   IRanges,
   S4Vectors,
   SummarizedExperiment,
-  multtest
+  multtest,
+  matrixStats
 Suggests:
   testthat

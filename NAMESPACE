@@ -11,6 +11,7 @@ importFrom("stats", "cor.test", "drop1", "glm", "kruskal.test",
     "p.adjust", "rgamma", "t.test", "wilcox.test",
     "pnorm", "psignrank", "pt", "pwilcox")
 importFrom("utils", "installed.packages")
+importFrom("matrixStats", "rowMedians")
 #importFrom("BiocParallel", "bplapply")
 
 export( aldex )

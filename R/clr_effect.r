@@ -49,7 +49,7 @@ if (verbose == TRUE) print("sanity check complete")
     #this is the median value across all monte carlo replicates
     cl2p <- NULL
     for ( m in getMonteCarloInstances(clr) ) cl2p <- cbind( cl2p, m )
-    rab$all <- t(apply( cl2p, 1, median ))
+    rab$all <- t(matrixStats::rowMedians(cl2p))
     rm(cl2p)
     gc()
  if (verbose == TRUE) print("rab.all  complete")
@@ -58,14 +58,14 @@ if (verbose == TRUE) print("sanity check complete")
     for ( level in levels(conditions) ) {
         cl2p <- NULL
         for ( i in levels[[level]] ) cl2p <- cbind( cl2p, getMonteCarloReplicate(clr,i) )
-        rab$win[[level]] <- t(apply( cl2p, 1, median ))
+        rab$win[[level]] <- t(rowMedians(cl2p))
         rm(cl2p)
         gc()
     }
  if (verbose == TRUE) print("rab.win  complete")
 
-    if (is.multicore == TRUE)  rab$spl <- bplapply( getMonteCarloInstances(clr), function(m) { t(apply( m, 1, median )) } )
-    if (is.multicore == FALSE) rab$spl <- lapply( getMonteCarloInstances(clr), function(m) { t(apply( m, 1, median )) } )
+    if (is.multicore == TRUE)  rab$spl <- bplapply( getMonteCarloInstances(clr), function(m) { t(rowMedians(m)) } )
+    if (is.multicore == FALSE) rab$spl <- lapply( getMonteCarloInstances(clr), function(m) { t(rowMedians(m)) } )
 
 if (verbose == TRUE) print("rab of samples complete")
 
@@ -158,11 +158,11 @@ if (verbose == TRUE) print("between group difference calculated")
     names( l2s ) <- c( "btw", "win" )
     l2s$win <- list()
 
-    l2s$btw <- t(apply( l2d$btw, 1, median ))
-    l2s$win  <- t(apply( attr(l2d$win,"max"), 1, median ))
+    l2s$btw <- t(rowMedians(l2d$btw))
+    l2s$win  <- t(rowMedians(attr(l2d$win,"max")))
 if (verbose == TRUE) print("group summaries calculated")
 
-    effect  <- t(apply( l2d$effect, 1, median ))
+    effect  <- t(rowMedians(l2d$effect))
     overlap <- apply( l2d$effect, 1, function(row) { min( aitchison.mean( c( sum( row < 0 ) , sum( row > 0 ) ) + 0.5 ) ) } )
 if (verbose == TRUE) print("effect size calculated")
 
